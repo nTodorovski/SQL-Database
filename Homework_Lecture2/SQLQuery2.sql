@@ -95,11 +95,9 @@ DEFAULT 100 FOR [AchievementMaxPoints]
 GO
 
 --Change GradeDetails table to prevent inserting AchievementPoints that will more than AchievementMaxPoints​
-
--- Na ova mi pravi problemi
 ALTER TABLE [dbo].[GradeDetails] WITH CHECK
 ADD CONSTRAINT CHK_Grade_Details
-CHECK (AchievementPoints < AchievementMaxPoints);
+CHECK (AchievementPoints <= AchievementMaxPoints);
 GO
 
 --Change AchievementType table to guarantee unique names across the Achievement types
@@ -145,7 +143,7 @@ GO
 
 --List all Students without exam Grade (using Right Join)
 select s.FirstName as StudentName
-from dbo.[Student] s
-right join dbo.Grade g on g.StudentID = s.ID
+from dbo.[Grade] g
+right join dbo.Student s on g.StudentID = s.ID
 where g.Grade is null
 GO
