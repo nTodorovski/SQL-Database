@@ -90,7 +90,7 @@ go
 
 create view vv_StudentGradeDetails
 as
-select s.FirstName,s.LastName, count(AchievementTypeID) as AllExams
+select s.FirstName + N' ' + s.LastName as StudentName, count(AchievementTypeID) as AllExams
 from dbo.Grade g
 inner join dbo.Student s on s.ID = g.StudentID
 inner join dbo.GradeDetails gd on gd.GradeID = g.ID
